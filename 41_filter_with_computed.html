@@ -1,0 +1,32 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<html>
+<head>
+    <title>Filter with computed - Vue.js</title>
+    <style>
+    </style>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model="filterText"/>
+        <ul>
+            <li v-for="item in filterLang">{{item}}</li>
+        </ul>
+    </div>
+</body>
+<script>
+new Vue({
+    el:"#app",
+    data:{
+        filterText:"",
+        items:["php","java","c","c++","node.js","python","ruby"],
+    },
+    computed:{
+        filterLang(){
+            return this.items.filter((el)=>{
+                return el.match(this.filterText);
+            });
+        }
+    }
+});
+</script>
+</html>

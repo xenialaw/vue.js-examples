@@ -1,0 +1,37 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<html>
+<head>
+    <title>Multiple modifiers - Vue.js</title>
+</head>
+<body>
+    <div id="app">
+        <div class="row">
+            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
+                <h1 v-custom-on:click="clickExample">Directives Exercise</h1>
+                <!-- Exercise -->
+                <!-- Build a Custom Directive which works like v-on (Listen for Events) -->
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+new Vue({
+    directives: {
+        'custom-on': {
+            bind(el, binding, vnode) {
+                if (binding.arg) {
+                    let listenerName = 'on' + binding.arg;
+                    el[listenerName] = binding.value;
+                }
+            }
+        }
+    },
+    methods: {
+        clickExample: function() {
+            console.log('element clicked!');
+        }
+    }
+});
+</script>
+</html>
+

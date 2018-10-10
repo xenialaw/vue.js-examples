@@ -1,0 +1,29 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<html>
+<head>
+    <title>Local custom directive - Vue.js</title>
+    <style>
+    </style>
+</head>
+<body>
+    <div id="app">
+        <p v-local-highlight>Test</p>
+    </div>
+</body>
+<script>
+new Vue({
+    el:"#app",
+    data:{
+        
+    },
+    directives:{
+        "local-highlight":{
+            bind(el, binding, vnode){
+                el.style.color = "red";
+            }
+        }
+    }
+});
+</script>
+</html>
+

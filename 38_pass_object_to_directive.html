@@ -1,0 +1,48 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<html>
+<head>
+    <title>Pass object to directive - Vue.js</title>
+</head>
+<body>
+    <div id="app">
+        <p>line1</p>
+        <p v-local-highlight>line2</p>
+        <p v-local-highlight.blink="{color1:'red', color2:'blue',delay:1000}">line3</p>
+        <p v-local-highlight.delayed>line1</p>
+    </div>
+</body>
+<script>
+new Vue({
+    el:"#app",
+    data:{
+        
+    },
+    directives:{
+        "local-highlight":{
+            bind(el, binding, vnode){
+                if(binding.modifiers['delayed']){
+                    setTimeout(()=>{
+                        el.style.color = "green";
+                    },500);
+                }
+                if(binding.modifiers['blink']){
+                    var currentColor = binding.value.color1;
+                    setInterval(()=>{
+                        if(currentColor == binding.value.color2){
+                            currentColor = binding.value.color1;
+                        }else{
+                            currentColor = binding.value.color2;
+                        }
+                        el.style.color = currentColor;
+                    },500);
+                }
+                //Check if el with no modifier.
+                if (Object.keys(binding.modifiers).length == 0){
+                    el.style.backgroundColor = "yellow";
+                }
+            }
+        }
+    }
+});
+</script>
+</html>
