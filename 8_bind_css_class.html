@@ -1,0 +1,68 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<html>
+<head>
+<title> - Vue.js</title>
+<style>
+    div {display:inline-block;float:left;}
+    .demo {width:50px;height:50px; margin:5px; background:#eee;float:left;}
+    .grey {background:grey;}
+    .red {background:red;}
+    .blue {background:blue;}
+    .green {background:green;}
+</style>
+</head>
+<body>
+  <div id="app">
+    <div>
+      <!-- (1) CSS method add red -->
+      <div class="demo red"></div>
+      <!-- (2) inline style bind style -->
+      <div class="demo" :style="{'background':'red'}"></div>
+      <!-- (3) vue.js bind class -->
+      <div class="demo" @click="attachRed=!attachRed" :class="['red']"></div>
+      <!-- (4) vue.js bind class use boolean -->
+      <div class="demo" :class="{red:true}"></div>
+      <!-- (5) vue.js bind class use value -->
+      <div class="demo" :class="{red:attachRed}"></div>
+      <!-- (6) vue.js bind class use computed value -->
+      <div class="demo" :class="attachRedClass"></div>
+      <!-- (7) vue.js use model class name -->
+      <div class="demo" :class="[bgColor]"></div>
+      <!-- (8) vue.js bind with condition -->
+      <div class="demo" :class="[{red:attachRed}]"></div>
+      <!-- (9) vue.js use model style -->
+      <div class="demo" :style="{'background':bgColor}"></div>
+      <!-- (10) vue.js bind with style with computed property. -->
+      <div class="demo" :style="redStyle"></div>
+      <div class="demo"></div>
+    </div>
+    <hr />
+    <p>Please input background color you want here: <input v-model="bgColor" placeholder="color name or color code" /></p>
+    <p>You have input : {{bgColor}}</p>
+    <p>attachRed value: {{attachRed}}</p>
+    </div>
+</body>
+<script>
+new Vue({
+    el:"#app",
+    data:{
+        attachRed:true,
+        bgColor:"red"
+    },
+    computed:{
+        attachRedClass:function(){
+            return {
+                red:this.attachRed
+            };
+        },
+        redStyle : function(){
+            return {
+                'border':'1px solid #000',
+                'background':this.bgColor
+            }
+        }
+    }
+});
+</script>
+</html>
+

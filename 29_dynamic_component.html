@@ -1,0 +1,48 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<html>
+<head>
+    <title>Dynamic component - Vue.js</title>
+    <style>
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button @click="selectedCmp='appQuote'">Quote</button>
+        <button @click="selectedCmp='appNew'">New</button>
+        <button @click="selectedCmp='appAuthor'">Author</button>
+        <hr />
+        <component :is="selectedCmp"></component>
+    </div>
+</body>
+<script>
+Vue.component("appQuote",{
+    template:`
+        <div>
+        <p>Quote</p>
+        </div>
+    `
+});
+Vue.component("appNew",{
+    template:`
+        <div>
+        <p>New</p>
+        </div>
+    `
+});
+Vue.component("appAuthor",{
+    template:`
+        <div>
+        <p>Author</p>
+        </div>
+    `
+});
+
+new Vue({
+    el:"#app",
+    data:{
+        selectedCmp : "appQuote"
+    }
+});
+</script>
+</html>
+

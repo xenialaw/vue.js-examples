@@ -1,0 +1,88 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<html>
+<head>
+    <title>EventBus - Vue.js</title>
+    <style>
+    </style>
+</head>
+<body>
+    <div id="app">
+      <student></student>
+      <hr />
+      <teacher></teacher>
+      <hr />
+      <p>studentName: {{studentName}}</p>
+      <p>teacherName: {{teacherName}}</p>
+    </div>
+</body>
+<script>
+var EventBus = new Vue()
+
+Vue.component("student",{
+    data(){
+        return {
+            "student":"Ann",
+            "teacher":""
+        };
+    },
+    methods:{
+        click(){
+            EventBus.$emit('setStudentName',this.student);
+        },
+    },
+    mounted:function(){
+    var vm = this;
+        EventBus.$on("setTeacherName",(data)=>{
+            vm.teacher = data;
+        });
+    },
+    template:`<div>
+                  <button @click="click">click</button>
+                  <p>Student {{student}} has a teacher {{teacher}}</p>
+              <div>`
+});
+
+Vue.component("teacher",{
+    data(){
+        return {
+            "teacher":"John",
+            "student":"",
+            };
+    },
+    methods:{
+        click(){
+            EventBus.$emit('setTeacherName',this.teacher);
+        },
+    },
+    mounted:function(){
+    var vm = this;
+        EventBus.$on("setStudentName",(data)=>{
+            vm.student = data;
+        });
+    },
+    template:`<div>
+                  <button @click="click">click</button>
+                  <p>Teacher {{teacher}} has a student {{student}}</p>
+              <div>`
+});
+
+new Vue({
+  el: "#app",
+  data:{
+    studentName:"#",
+    teacherName:"@"
+  },
+  mounted(){
+    var self = this;
+    EventBus.$on('setStudentName', function(data){
+      self.studentName = data;
+    });
+    EventBus.$on('setTeacherName', function(data){
+      self.teacherName = data;
+    });
+  },
+});
+
+//https://jsfiddle.net/4do5ng92/
+</script>
+</html>

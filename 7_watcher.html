@@ -1,0 +1,27 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<html>
+<head>
+    <title>Watcher - Vue.js</title>
+</head>
+<body>
+    <div id="app">
+        <button v-on:click="count++">Increase</button>
+        <p>{{count}}</p>
+    </div>
+</body>
+<script>
+new Vue({
+    el:"#app",
+    data:{
+        count: 0
+    },
+    watch:{
+        count: function(){
+            console.log("Value count is changed to "+this.count);
+        }
+    }
+    
+});
+</script>
+</html>
+

@@ -1,0 +1,46 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<html>
+<head>
+    <title>Component - Vue.js</title>
+</head>
+<body>
+    <div class="app1">
+        <h2>.app1 - 1</h2>
+    </div>
+    <div class="app1">
+        <!-- Vue instance not work on this element-->
+        <h2>.app1 - 2</h3>
+        <hello></hello>
+    </div>
+    
+    <hr />
+    <!-- the component without vue instance which can control can't apply template -->
+    <hello></hello>
+    <hello></hello>
+    <hello></hello>
+    
+    <hr />
+    <div id="app2">
+        <h2>#app2</h2>
+        <hello></hello>
+    </div>
+</body>
+<script>
+//Vue instance apply on first element match the el property.
+var vm1 = new Vue({
+    el:".app1",
+    template:"<p>This ele changed by vue instance template.</p>"
+});
+
+//Vue conponent apply on all element match the el property.
+Vue.component('hello',{
+    template:"<p>This ele changed by vue component.</p>"
+});
+
+var vm2 = new Vue({
+    el:"#app2",
+});
+
+</script>
+</html>
+

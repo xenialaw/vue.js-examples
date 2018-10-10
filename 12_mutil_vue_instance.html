@@ -1,0 +1,55 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<html>
+<head>
+    <title>Multi vue instance - Vue.js</title>
+    <style>
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>{{title}}</h1>
+        <p>{{msg}}</p>
+        <button @click="onChange">Button 1</button>
+    </div>
+    <div id="app2">
+        <h1>{{title}}</h1>
+        <p>{{msg}}</p>
+        <button @click="onChange">Button 2</button>
+    </div>
+</body>
+<script>
+var vm1 = new Vue({
+  el:"#app",
+  data:{
+    "title":"Instance 1",
+    "msg":"msg 1"
+  },
+  methods:{
+    onChange:function(){
+        this.title = "Changed title 1";
+        vm2.title = "Title changed by 1";
+    }
+  }
+});
+
+window.setTimeout(function(){
+    vm1.msg = "Message 1 is changed by timer.";
+    vm2.msg = "Message 2 is changed by timer.";
+}, 3000);
+
+var vm2 = new Vue({
+  el:"#app2",
+  data:{
+    "title":"Instance 2",
+    "msg":"msg 2"
+  },
+  methods:{
+    onChange:function(){
+        this.title = "Changed title 2";
+        vm1.title = "Title changed by 2";
+    }
+  }
+});
+</script>
+</html>
+

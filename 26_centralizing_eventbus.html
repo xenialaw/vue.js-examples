@@ -1,0 +1,68 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<html>
+<head>
+    <title>Centralizing eventBus - Vue.js</title>
+</head>
+<body>
+    <div id="app">
+        <cmp1></cmp1>
+        <cmp2></cmp2>
+        {{age}}
+    </div>
+</body>
+<script>
+var eventBus = new Vue({
+    methods:{
+        editAge(age){
+            eventBus.$emit("changeAge",age);
+        }
+    }
+});
+
+Vue.component("cmp1",{
+    data(){return {userAge:"@1"}},
+    template:`
+        <div>
+        <p>
+            <button @click="editAge">Edit Age</button>
+            User Age:{{userAge}}
+        </p>
+        </div>
+    `,
+    methods:{
+        editAge(){
+            eventBus.editAge(30);
+        }
+    }
+});
+
+Vue.component("cmp2",{
+    data(){return {userAge:"@2"}},
+    template:`
+        <div>
+        <p>
+            <button @click="editAge">Edit Age</button>
+            User Age:{{userAge}}
+        </p>
+        </div>
+    `,
+    methods:{
+        editAge(){
+            eventBus.editAge(60);
+        }
+    }
+});
+
+new Vue({
+    el:"#app",
+    data:{"age":"#"},
+    mounted(){
+        var self = this;
+        eventBus.$on("changeAge",function(data){
+            self.age = data;
+        });
+    }
+});
+</script>
+</html>
+

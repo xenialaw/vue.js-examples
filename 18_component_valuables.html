@@ -1,0 +1,57 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<html>
+<head>
+    <title>Component valuables - Vue.js</title>
+    <style>
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h3>Local Value</h3>
+        <my-cmp-local-v></my-cmp-local-v>
+        <my-cmp-local-v></my-cmp-local-v>
+        <hr />
+        <h3>Global Value</h3>
+        <my-cmp-global-v></my-cmp-global-v>
+        <my-cmp-global-v></my-cmp-global-v>
+    </div>
+</body>
+<script>
+var data = {status:"Critical"};
+
+Vue.component("my-cmp-local-v",{
+    data:function(){
+        return {status:"Critical"};
+    },
+    template:`<div>
+                Server Status: {{status}} (<button @click="changeStatus">Change</button>)
+              </div>`,
+    methods:{
+        changeStatus: function(){
+            this.status = "Noraml";
+        }
+    }
+});
+
+Vue.component("my-cmp-global-v",{
+    data:function(){
+        return data;
+    },
+    template:`<div>
+                Server Status : {{status}} (<button @click="changeStatus">Change</button>)
+              </div>`,
+    methods:{
+        changeStatus: function(){
+            this.status = "Noraml";
+        }
+    }
+});
+
+new Vue({
+    el:"#app",
+    data:{
+    }
+});
+</script>
+</html>
+

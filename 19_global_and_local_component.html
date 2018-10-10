@@ -1,0 +1,51 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<html>
+<head>
+    <title> - Vue.js</title>
+    <style>
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h3>Global component</h3>
+        <g-cmp></g-cmp>
+        <g-cmp></g-cmp>
+        <h3>Local component</h3>
+        <l-cmp-1a></l-cmp-1a>
+        <l-cmp-1a></l-cmp-1a>
+        <br />
+        <l-cmp-1b></l-cmp-1b>
+        <l-cmp-1b></l-cmp-1b>
+        <br />
+        <l-cmp-1c></l-cmp-1c>
+        <l-cmp-1c></l-cmp-1c>
+    </div>
+</body>
+<script>
+Vue.component("g-cmp",{
+    data :function(){
+        return {count:0};
+    },
+    template:'<button @click="count++">Global {{count}}</button>'
+});
+
+var lCmpA = { data : function(){return {count:0};},
+              template :'<button @click="count++">Local A {{count}}</button>'
+            };
+var lCmpB = { data : function(){return {count:0};},
+              template :'<button @click="count++">Local B {{count}}</button>'
+            };
+            
+new Vue({
+    el:"#app",
+    components:{
+        "l-cmp-1a":lCmpA,
+        "l-cmp-1b":lCmpB,
+        "l-cmp-1c": { data : function(){return {count:0};},
+                      template :'<button @click="count++">Local C {{count}}</button>'
+                    }
+    }
+});
+</script>
+</html>
+

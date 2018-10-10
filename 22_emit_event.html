@@ -1,0 +1,52 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<html>
+<head>
+    <title>Emit event - Vue.js</title>
+    <style>
+        #app.cmp {background:#abcdef; margin:10px;padding:10px;color:#000}
+        .cmp {background:#123456;color:#fff;margin:10px auto; padding:10px;}
+    </style>
+</head>
+<body>
+    <div id="app" class="cmp">
+        <h2>Parent component</h2>
+        <p>This example shown the child component pass data to parent component, 
+           all data is stored into component.</p>
+        <user v-on:name-was-reset="myName=$event" @name-was-reverse="myName=$event"></user>
+        <p>I renamed myself to "{{myName}}". </p>
+    </div>
+</body>
+<script>
+Vue.component("user",{
+    data:function(){
+        return {name:"Mary"};
+    },
+    methods:{
+        reverseName:function(){
+            this.name = "yraM";
+            this.$emit("name-was-reverse",this.name);
+            return this.name;
+        },
+        resetName:function() {
+            this.name = "Mary";
+            this.$emit("name-was-reset",this.name);
+            return this.name;
+        }
+    },
+    template:`<div class="cmp">
+                <h2>Child Component</h2>
+                <p>You may view the User Details here :</p>
+                <p><b>User Name: {{ name }}</b></p>
+                <button @click="reverseName">Reverse Name</button>
+                <button @click="resetName">Reset Name</button>
+              </div>`
+});
+
+new Vue({
+    el:"#app",
+    data:{
+        "myName":"",
+    },
+});
+</script>
+</html>

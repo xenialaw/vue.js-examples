@@ -1,0 +1,37 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<html>
+<head>
+    <title>Mount template - Vue.js</title>
+    <style>
+    </style>
+</head>
+<body>
+    <div id="app1"></div>
+    <div id="app2"></div>
+    <div id="app3"></div>
+</body>
+<script>
+//method 1
+var vm1 = new Vue({
+    el:"#app1",
+    data:{
+        "title":"Title 1"
+    },
+    template:"<p>This is vue instance 1 - ({{title}})</p>"
+});
+
+//method 2
+var vm2 = new Vue({
+    template:"<p>This is vue instance 2</p>"
+});
+vm2.$mount("#app2");
+
+//method 3
+var vm3 = new Vue({
+    template:"<p>This is vue instance 3</p>"
+});
+vm3.$mount();
+document.getElementById("app3").appendChild(vm3.$el);
+</script>
+</html>
+

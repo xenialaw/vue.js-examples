@@ -1,0 +1,41 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<html>
+<head>
+    <title>Slot - Vue.js</title>
+    <style>
+        #child {background:#ddeeff;margin:10px;padding:10px;}
+        #child-lot {background:#aabbcc;margin:10px;padding:10px;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <p>This example shows how to use slots:</p>
+        <child quote="I am a quote with props!">
+        </child>
+        <child-slot>
+            <p>I am a wonderful quote using slot.</p>
+        </child-slot>
+    </div>
+</body>
+<script>
+Vue.component("child-slot",{
+    template:`<div id="child-lot">
+                  <slot></slot>
+              </div>`
+});
+
+Vue.component("child",{
+    props:["quote"],
+    template:`<div id="child">
+                  {{quote}}
+              </div>`
+});
+
+new Vue({
+    el:"#app",
+    data:{
+    }
+});
+</script>
+</html>
+

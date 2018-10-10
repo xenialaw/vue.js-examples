@@ -1,0 +1,44 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<html>
+<head>
+    <title>mouse modifier- Vue.js</title>
+    <style>#app {background:#efefef;}</style>
+</head>
+<body>
+    <div id="app" v-on:mouseover="showCoordinates">
+        <p>This is an example using v-on directive. if user click the button, we add one to the counter below button.</p>
+        <button v-on:click=addCount()>Add count</button>
+        <p>{{count}}</p>
+        <br>
+        <p>Let move your mouse over the area with background in grey, the text dead area is somewhere without event</p>
+        <p><b>Your mouse x and y coordinates:{{x}},{{y}} - 
+           <!--<span v-on:mouseover="deadArea">dead area</span>-->
+           <!--<span v-on:mouseover.stop>dead area</span>-->
+           <span v-on:mouseover="$event.stopPropagation()">dead area</span>
+           </b>
+        </p>
+    </div>
+</body>
+<script>
+new Vue({
+    el:"#app",
+    data:{
+        count:0,
+        x:0,
+        y:0
+    },
+    methods:{
+        addCount: function(){
+            return this.count++;
+        },
+        showCoordinates: function(e){
+            this.x = e.clientX;
+            this.y = e.clientY;
+        },
+        deadArea: function(e){
+            e.stopPropagation();
+        }
+    }
+});
+</script>
+</html>

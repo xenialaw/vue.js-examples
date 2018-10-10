@@ -1,0 +1,36 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<html>
+<head>
+    <title>Computed - Vue.js</title>
+</head>
+<body>
+    <div id="app">
+        <button v-on:click="count++">Increase</button>
+        <p>Counter : {{getResult()}}</p>
+        <p>Show greeting : {{greet("Hi!")}}</p>
+    </div>
+</body>
+<script>
+new Vue({
+    el:"#app",
+    data:{
+        count: 0
+    },
+    methods:{
+        getResult(){
+            console.log("Rendered counter result : "+this.count);
+            return this.count;
+        }
+    },
+    computed:{
+        greet(){
+            //return msg => {console.log("Rendered "+msg); return msg;}
+            return function(msg){
+                console.log("Rendered "+msg);
+                return msg;
+            }
+        }
+    }
+});
+</script>
+</html>

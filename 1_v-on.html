@@ -1,0 +1,33 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<html>
+<head>
+    <title>v-on - Vue.js</title>
+</head>
+<body>
+    <div id="app">
+        <h1>v-on - Vue.js</h1>
+        <input type="textbox" name="title" v-on:input="changeTitle" />
+        <p>{{title}}</p>
+        <button v-on:click="showAlert">Click me show inputed in alert box</button>
+    </div>
+</body>
+<script>
+new Vue({
+    el:"#app",
+    data:{
+        title:""
+    },
+    methods:{
+        changeTitle:function(e){
+            this.title=e.target.value;
+        },
+        showAlert:function(){
+            var msg = this.title.length > 0 ?
+                          "You inputed : "+this.title :
+                          "You input nothing";
+            alert(msg);
+        }
+    }
+});
+</script>
+</html>

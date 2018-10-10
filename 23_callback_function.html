@@ -1,0 +1,51 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<html>
+<head>
+<title>Props + $emit - Vue.js</title>
+<style>
+#app {background:#eee; padding:10px;margin:10px;}
+#child {background:#456789;color:#fff;padding:10px;margin:10px;}
+</style>
+</head>
+<body>
+  <div id="app">
+    <p>Company name : <input type="text" v-model="companyName"></p>
+    <p>Parent value: {{companyName}}</p>
+    <my-cmp :companyname="companyName" @passtoparent="user=$event"></my-cmp>
+    <p>Value from child: {{user}}</p>
+  </div>
+</body>
+<script>
+Vue.component("my-cmp",{
+  props:["companyname"],
+  data:function(){
+    return {
+      "username": ""
+    };
+  },
+  methods:{
+    setEvent : function(e){
+      this.username = e.target.value;
+      this.$emit("passtoparent",this.username);
+    }
+  },
+  template:`
+    <div id="child">
+    <p>Child compaonent value: {{companyname}}</p>
+    <p>Input your name: <input type="text" name="user" 
+                                            v-on:input="setEvent" /></p>
+    <p>{{username}}</p>
+    </div>
+    `,
+});
+
+new Vue({
+    el:"#app",
+    data:{
+      companyName: "", 
+      user:""
+    }
+});
+</script>
+</html>
+

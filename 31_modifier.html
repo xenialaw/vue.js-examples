@@ -1,0 +1,55 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<html>
+<head>
+    <title>Modifier - Vue.js</title>
+</head>
+<body>
+    <div id="app">
+    <h1>.lazy</h1>
+    <h2>Without .lazy</h2>
+    <p>
+        <input type="text" v-model="data1" />
+        {{data1}}
+    </p>
+    <h2>With .lazy</h2>
+    <p>
+        <input type="text" v-model.lazy="data2" />
+        {{data2}}
+    </p>
+    <hr />
+    <h1>.number</h1>
+    <p>
+        <input type="number" v-model.number="data3"/>
+        {{data3}}
+    </p>
+    <hr />
+    <h1>.trim</h1>
+    <p>
+        <input type="text" v-model.trim="data4"/>
+        {{data4}}
+    </p>
+    <hr />
+    <h1>.prevent</h1>
+        <form>
+        <input type="submit" @click.prevent="showMsg" />
+        </form>
+    </div>
+</body>
+<script>
+new Vue({
+    el:"#app",
+    data:{
+        'data1':'',
+        'data2':'',
+        'data3':'',
+        'data4':'',
+    },
+    methods:{
+        showMsg(){
+            alert("The form haven't be submitted");
+        }
+    }
+});
+</script>
+</html>
+

@@ -1,0 +1,36 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<html>
+<head>
+    <title>Custom directive - Vue.js</title>
+</head>
+<body>
+    <div id="app">
+        <h1>Custom directive</h1>
+        <p v-highlight>line 1</p>
+        <p v-highlight:background="'green'">line 2</p>
+        <p v-highlight:color="'red'">line 3</p>
+        <p>line 4</p>
+    </div>
+</body>
+<script>
+Vue.directive('highlight',{
+    bind(el, binding, vnode){
+        switch(binding.arg){
+            case "background":
+                el.style.backgroundColor = binding.value;
+                break;
+            case "color":
+                el.style.color = binding.value;
+                break;
+            default:
+                el.style.backgroundColor = "yellow";
+        }
+    }
+});
+
+new Vue({
+    el:"#app",
+});
+</script>
+</html>
+

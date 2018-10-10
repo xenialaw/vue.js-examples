@@ -1,0 +1,35 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<html>
+<head>
+    <title>v-for - Vue.js</title>
+    <style>
+    </style>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(ingredient,i) in ingredients" v-bind:key="i">{{i}}-{{ingredient}}</li>
+        </ul>
+        <button @click="ingredients.push('mango')">Add Ingredient</button>
+        <hr />
+        <ul>
+            <li v-for="person in persons">
+                <div v-for="(value, key, index) in person" v-bind:key="index">{{index}}) {{key}} : {{value}}</div>
+            </li>
+        </ul>
+    </div>
+</body>
+<script>
+new Vue({
+    el:"#app",
+    data:{
+        ingredients:["meat","fruit","cookies"],
+        persons:[
+            {name:"Max", age:27, color:"red"},
+            {name:"Anna", age:"unknown", color:"blue"}
+        ]
+    }
+});
+</script>
+</html>
+

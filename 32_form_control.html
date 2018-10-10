@@ -1,0 +1,59 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<html>
+<head>
+    <title>From control - Vue.js</title>
+    <style>
+    </style>
+</head>
+<body>
+    <div id="app">
+    <form>
+        <h2>Textbox</h2>
+        <p>Two way binding using v-model</p>
+        <input type="text" v-model="tb1"/>{{tb1}}
+        
+        <p>Two way binding with v-on and v-bind</p>
+        <input type="text" @input="tb2=$event.target.value" :value="tb2"/>{{tb2}}
+        
+        <h2>CheckBox</h2>
+        <input type="checkbox" v-model="cb" value="Apple"/>Apple
+        <input type="checkbox" v-model="cb" value="Banana" />Banana
+        <input type="checkbox" v-model="cb" value="Orange" />Orange
+        <ul>
+            <li v-for="item in cb">{{item}}</li>
+        </ul>
+        
+        <h2>Radiobox</h2>
+        <input type="radio" v-model="rb" value="Male"/>Male
+        <input type="radio" v-model="rb" value="Female" />Female
+        <ul>
+            <li v-for="item in cb">{{item}}</li>
+        </ul>
+        
+        <h2>Textarea</h2>
+        <textarea v-model="ta"></textarea>
+        <p style="white-space: pre">{{ta}}</p>
+        
+        <h2>Dropdown List</h2>
+        <select v-model="selectedOpt">
+            <option v-for="opt in opts">{{opt}}</option>
+        </select>
+    </form>
+    </div>
+</body>
+<script>
+new Vue({
+    el:"#app",
+    data:{
+        "tb1":"",
+        "tb2":"",
+        "cb":['Orange'],
+        "rb":'Female',
+        "ta":"skfjskf \nfdsfddsf",
+        opts:["High","Middle","Low"],
+        selectedOpt : "Middle"
+    }
+});
+</script>
+</html>
+

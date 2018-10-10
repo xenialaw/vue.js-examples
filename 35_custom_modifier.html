@@ -1,0 +1,43 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<html>
+<head>
+    <title>Custom modifier - Vue.js</title>
+</head>
+<body>
+    <div id="app">
+        <h1>Custom modifier</h1>
+        <p>This example shown custom modifier with custom directive.</p>
+        <p v-highlight>line 1</p>
+        <p v-highlight:background.delayed="'green'">line 2</p>
+        <p v-highlight:color="'red'">line 3</p>
+        <p>line 4</p>
+    </div>
+</body>
+<script>
+Vue.directive('highlight',{
+    bind(el, binding, vnode){
+        var delay = 0;
+        if(binding.modifiers['delayed']){
+            delay = 1000;
+        }
+        setTimeout(()=>{
+            switch(binding.arg){
+                case "background":
+                    el.style.backgroundColor = binding.value;
+                    break;
+                case "color":
+                    el.style.color = binding.value;
+                    break;
+                default:
+                    el.style.backgroundColor = "yellow";
+            }
+        },delay);
+    }
+});
+
+new Vue({
+    el:"#app",
+});
+</script>
+</html>
+
