@@ -1,0 +1,62 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<html>
+<head>
+    <title>Mixin with methods property - Vue.js</title>
+</head>
+<body>
+    <div id="app">
+        <p>Please open browser console to view this example.</p>
+    </div>
+</body>
+<script>
+var mixin = {
+    methods:{
+        sayHello(){
+            console.log("Hello from mixin");
+        },
+        saySth(){
+            console.log("Sth from mixin.");
+        }
+    },
+    created(){
+        this.sayHello();
+        this.saySth();
+    }
+};
+
+//This shows mixin can be used in component, you 
+/*new Vue({
+    el:"#app",
+    mixins:[mixin],
+    methods:{
+        saySth(){
+            console.log("Sth from vm.");
+        }
+    },
+    created(){
+        this.sayHello();
+        this.saySth();
+    },
+});*/
+
+var Component = Vue.extend({
+    mixins:[mixin],
+    methods:{
+        saySth(){
+            console.log("Sth from vm.");
+        }
+    },
+    created(){
+        this.sayHello();
+        this.saySth();
+    },
+})
+
+var vm = new Vue({
+    el:"#app",
+    components:{
+        cmp:new Component()
+    }
+});
+</script>
+</html>

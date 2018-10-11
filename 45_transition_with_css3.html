@@ -1,0 +1,58 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<html>
+<head>
+<title>Animation with CSS3 - Vue.js</title>
+<style>
+.alert {color:blue; background:#eee; padding:10px; margin:10px;}
+
+.slide-enter {}
+.v-enter {opacity:0;}
+.v-enter-active {transition:opacity .3s;}
+.v-leave-active {transition:opacity .3s; opacity:0;}
+
+.slide-enter-active {animation: 1s slide-in forwards;}
+.slide-leave-active {animation: 1s slide-out forwards; }
+
+@keyframes slide-in {
+    from {
+        transform:translateY(10px);
+    }to {
+        transform:translateY(0);
+    }
+}
+
+@keyframes slide-out {
+    from {
+        transform:translateY(0);
+    }to {
+        transform:translateY(10px);
+    }
+}
+</style>
+</head>
+<body>
+    <div id="app">
+    <button @click="show=!show">Show Alert</button>
+    <br /><br />
+    <transition>
+        <div class="alert" v-if="show">
+            This is some infomation.
+        </div>
+    </transition>
+    <transition name="slide">
+        <div class="alert" v-if="show" type="animation">
+            This is some infomation.
+        </div>
+    </transition>
+    </div>
+</body>
+<script>
+new Vue({
+    el:"#app",
+    data:{
+        show : false,
+    }
+});
+</script>
+</html>
+

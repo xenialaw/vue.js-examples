@@ -1,0 +1,31 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<html>
+<head>
+    <title>Mixin with data property - Vue.js</title>
+</head>
+<body>
+    <div id="app">
+        <p>Please open browser console to view this example.</p>
+    </div>
+</body>
+<script>
+var mixin = {
+    data(){
+        return {
+            foo:"foo",
+            conflict:"conflict from mixin",
+        }
+    }
+};
+
+var vm = new Vue({
+    mixins:[mixin],
+    data:{
+        bar:"bar",
+        conflict:"conflict from vm",
+    }
+});
+
+console.log(vm.$data);
+</script>
+</html>

@@ -1,0 +1,33 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<html>
+<head>
+<title>Transition with different css class - Vue.js</title>
+<link href='https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css' rel='stylesheet' type='text/css'>
+<style>
+.colorbox {background:#eee; padding:10px; }
+</style>
+</head>
+<body>
+    <div id="app">
+        <button @click="show=!show">click</button> Status: {{show}}
+        <br /><br />
+        <transition 
+            appear
+            enter-active-class="animated bounce" 
+            leave-active-class="animated shake">
+            <div class="colorbox" v-if="show">
+                Example
+            </div>
+        </transition>
+    </div>
+</body>
+<script>
+new Vue({
+    el:"#app",
+    data:{
+        show : false
+    }
+});
+</script>
+</html>
+

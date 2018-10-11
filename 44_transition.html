@@ -1,0 +1,37 @@
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<html>
+<head>
+<title>Transition - Vue.js</title>
+<style>
+.alert {color:blue; background:#eee;}
+
+.v-enter {opacity:0;}
+.v-enter-active {transition:opacity .3s;}
+.v-enter-to {}
+
+.v-leave {}
+.v-leave-active {transition:opacity .3s; opacity:0;}
+.v-leave-to {}
+</style>
+</head>
+<body>
+    <div id="app">
+    <button @click="show=!show">Show Alert</button>
+    <br /><br />
+    <transition>
+        <div class="alert" v-if="show">
+            This is some infomation.
+        </div>
+    </transition>
+    </div>
+</body>
+<script>
+new Vue({
+    el:"#app",
+    data:{
+        show : false,
+    }
+});
+</script>
+</html>
+
